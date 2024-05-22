@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import sqlite3 as sl
+from Device import Device
 
 class LabEnt:
     def __init__(self, form, label, data, packside):
@@ -64,14 +65,18 @@ class scene_main:
         self.ButSave.config(command=lambda:self.SaveDevice())
         self.ButSave.pack(side=LEFT)
         
-        self.ButStart=Button(self.Rframe,text="Запуск web сервера")
-        self.ButStart.config(command=lambda:self.Select(self.device_list))
-        self.ButStart.pack(side=BOTTOM)
-        
         self.LabEntID=LabEnt(self.Rframe,"ID",self.device_id,TOP)
         self.LabEntImei=LabEnt(self.Rframe,"IMEI",self.device_imei,TOP)
         self.LabEntName=LabEnt(self.Rframe,"Номер",self.device_name,TOP)
         self.LabEntType=LabEnt(self.Rframe,"Тип",self.device_type,TOP)
+        
+        self.ButStart=Button(self.Rframe,text="Запуск web сервера")
+        self.ButStart.config(command=lambda:self.StartWork(self.LabEntID.get()))
+        self.ButStart.pack(side=TOP)
+        
+        self.ButStart=Button(self.Rframe,text="Остановка web сервера")
+        self.ButStart.config(command=lambda:self.StopWork())
+        self.ButStart.pack(side=TOP)
         
         self.FormMain.mainloop()
         
@@ -122,6 +127,13 @@ class scene_main:
             cursor.execute("""DELETE FROM CLIENTS WHERE id_client="""+self.LabEntID.get())
             con.commit()
         self.RefreshBox()
+        
+    def StartWork(self,id_device):
+        self.Device=Device(id_device)
+        self.Device.Start()
+    
+    def StopWork(self):
+        self.Device.Stop()
         
     
 m=scene_main()

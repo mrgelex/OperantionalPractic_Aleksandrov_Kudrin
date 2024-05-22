@@ -69,7 +69,7 @@ class Device:
             cursor.close()
         
     def WriteEventLog(self,dr):
-        if self.adt1 != dr["AcrDT1"] or self.adt2 != dr["AcrDT2"] or self.adt3 != dr["AcrDT3"]:
+        if self.adt1 != dr["AcrDT1"] or self.adt2 != dr["AcrDT2"] or self.adt3 != dr["ArcDT3"]:
             date_local=datetime.today().strftime("%Y.%m.%d")
             time_local=datetime.today().strftime("%H:%M:%S")
             con = sl.connect('Logs.db')
@@ -81,7 +81,7 @@ class Device:
                 cursor.close()
             self.adt1=dr["AcrDT1"]
             self.adt2=dr["AcrDT2"]
-            self.adt3=dr["AcrDT3"]
+            self.adt3=dr["ArcDT3"]
             
     def Thread(self):
         self.client = modbusClient.ModbusSerialClient(port="COM3",framer=Framer.RTU,baudrate=9600,timeout=1,bytesize=8,parity="N",stopbits=1,strict=False)
@@ -97,7 +97,7 @@ class Device:
         self.client.close()
         
         
-D=Device("123")     
-D.Start()
-time.sleep(10)
-D.Stop()
+#D=Device("123")     
+#D.Start()
+#time.sleep(10)
+#D.Stop()

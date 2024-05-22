@@ -132,7 +132,7 @@ class scene_main:
         
     def StartWork(self,id_device):
         self.Device=Device(id_device)
-        self.Device.Start()
+        #self.Device.Start()
         self.th2=Thread(target=runserver)
         self.th2.daemon=True
         self.th2.start()

@@ -1,9 +1,10 @@
 import sqlite3 as sl
-con = sl.connect('Logs.db')
+con = sl.connect('inter\Logs.db')
 with con:
     con.execute("""
         CREATE TABLE DEVICES (
             id_device INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            serial INTRGER
             IMEI INTEGER,
             name TEXT,
             type TEXT

@@ -81,7 +81,7 @@ DATABASES = {
     },
     'devices': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME':'db_devices.sqlite3'
+        'NAME': BASE_DIR / 'Logs.db'
     }
 }
 

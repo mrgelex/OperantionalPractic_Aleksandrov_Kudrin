@@ -6,9 +6,11 @@ from datetime import datetime
 from threading import Thread
 import time
 
+pathDB='Logs.db'
+
 class Device:
     def __init__(self,id_device):
-        con = sl.connect('Logs.db')
+        con = sl.connect(pathDB)
         cursor=con.cursor()
         cursor.execute("""SELECT name FROM DEVICES""")
         self.enable=False
@@ -60,7 +62,7 @@ class Device:
     def WriteTimeLog(self,dr):
         date_local=datetime.today().strftime("%Y.%m.%d")
         time_local=datetime.today().strftime("%H:%M:%S")
-        con = sl.connect('Logs.db')
+        con = sl.connect(pathDB)
         with con:
             cursor=con.cursor()
             cursor.execute("""INSERT INTO LOG_TIME (id_device, date_local, time_local, status, depth, power) VALUES ('"""+str(self.id_device)+"""', '"""+str(date_local)+"""', 
@@ -72,7 +74,7 @@ class Device:
         if self.adt1 != dr["AcrDT1"] or self.adt2 != dr["AcrDT2"] or self.adt3 != dr["ArcDT3"]:
             date_local=datetime.today().strftime("%Y.%m.%d")
             time_local=datetime.today().strftime("%H:%M:%S")
-            con = sl.connect('Logs.db')
+            con = sl.connect(pathDB)
             with con:
                 cursor=con.cursor()
                 cursor.execute("""INSERT INTO LOG_EVENT (id_device, date_local, time_local, status, depth, power) VALUES ('"""+str(self.id_device)+"""', '"""+str(date_local)+"""', 

@@ -1,0 +1,31 @@
+{% extends 'main/pag.html' %}
+
+{% block title %}
+{{'Регулировка'}}
+{% endblock %}
+
+{% block body %}
+<h1>Параметры:</h1>
+
+    
+<form method="post">
+    {% csrf_token %} 
+    <div class="adj-grid">
+            
+        {% for i in formbas %}
+            <div class="adj-grid-item">
+                <div class="element">
+                    {{i.label_tag}}
+                    {{i}}
+                </div>
+            </div>
+        {% endfor %}
+            <div class="adj-grid-item">
+                <div class="element">
+                    <input type="submit" value="Применить" /> 
+                </div>
+            </div>
+    </div>
+</form>              
+
+{% endblock %}

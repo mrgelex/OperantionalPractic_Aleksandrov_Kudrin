@@ -1,0 +1,29 @@
+{% extends 'main/pag.html' %}
+
+{% block title %}
+{{'График'}}
+{% endblock %}
+
+{% block body %}
+
+<h1>График устройства</h1>
+
+  <div class="win">
+    <form method="get">
+      <div class="dateform-grid">
+        {% for i in periodform %}
+          <div class="date-grid-item">
+            {{i.label_tag}}
+            {{i}}
+          </div>
+        {% endfor %}
+        <div class="date-grid-item-but">
+          <input type="submit" value="Отобразить" /> 
+        </div>
+      </div>
+    </form>
+    {{ gr|safe }}
+  </div>
+
+
+{% endblock %}

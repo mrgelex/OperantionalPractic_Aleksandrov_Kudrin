@@ -1,0 +1,108 @@
+body {
+    background-color: rgba(116, 116, 116, 0.959);
+}
+
+.main{
+    margin-left: 30vh;
+    margin-right: 30vh;
+    border-radius: 10px;
+    min-width: 600px;
+    height: 100vh;
+    background-color: rgb(218, 218, 218);
+
+}
+
+h1{
+    margin-left: 10%;
+}
+
+h2, h4{
+    position: normal;
+    margin-left: 10px;
+}
+
+/* h4{
+    position: normal;
+    margin-left: 10px;
+} */
+
+.inf-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    margin-left: 10%;
+    margin-right: 10%;
+    grid-gap: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    position: normal;
+
+}
+
+.inf-gdir-child{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    align-items:center
+}
+
+.but{
+    height: 30px;
+    align-items:center;
+    margin-left: 25%;
+}
+
+.gr{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.dateform-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(1, 30px);
+    align-items: center;
+    margin-left: 3%;
+}
+
+.date-grid-item-but{
+    width: 100px;
+    margin-left: 10px;
+}
+
+.win{
+    padding: 2%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+
+.adj-grid {
+    display: grid;
+    margin-left: 10%;
+    margin-right: 10%;
+    min-width: 450px;
+    max-width: 1000px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    position: normal;
+
+}
+
+.adj-grid-item {
+    height: 60px;
+    right: 5px;
+    text-align: right;
+    
+   }
+
+.element{
+    
+    margin-top: 10px;
+    padding-right: 20px;
+}

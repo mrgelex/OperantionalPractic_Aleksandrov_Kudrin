@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import ttk
 import sqlite3 as sl
 from Device import Device
+from inter.comand import runserver
+from threading import Thread
 
 class LabEnt:
     def __init__(self, form, label, data, packside):
@@ -131,9 +133,14 @@ class scene_main:
     def StartWork(self,id_device):
         self.Device=Device(id_device)
         self.Device.Start()
+        self.th2=Thread(target=runserver)
+        self.th2.daemon=True
+        self.th2.start()
+        
     
     def StopWork(self):
         self.Device.Stop()
+        
         
     
 m=scene_main()

@@ -52,10 +52,6 @@ class scene_main:
         self.ButSelect.config(command=lambda:self.Select(device_list))
         self.ButSelect.pack(side=LEFT)
         
-        self.ButSelect=Button(self.LBframe,text="Тест")
-        self.ButSelect.config(command=lambda:self.Select(device_list))
-        self.ButSelect.pack(side=LEFT)
-        
         self.LabEntID=LabEnt(self.Rframe,"ID",self.device_id,TOP)
         self.LabEntImei=LabEnt(self.Rframe,"IMEI",self.device_imei,TOP)
         self.LabEntName=LabEnt(self.Rframe,"Номер",self.device_name,TOP)

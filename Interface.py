@@ -72,12 +72,16 @@ class scene_main:
         self.LabEntName=LabEnt(self.Rframe,"Номер",self.device_name,TOP)
         self.LabEntType=LabEnt(self.Rframe,"Тип",self.device_type,TOP)
         
-        self.ButStart=Button(self.Rframe,text="Запуск web сервера")
+        self.ButStart=Button(self.Rframe,text="Запуск опроса")
         self.ButStart.config(command=lambda:self.StartWork(self.LabEntID.get()))
         self.ButStart.pack(side=TOP)
         
-        self.ButStart=Button(self.Rframe,text="Остановка web сервера")
+        self.ButStart=Button(self.Rframe,text="Остановка опроса")
         self.ButStart.config(command=lambda:self.StopWork())
+        self.ButStart.pack(side=TOP)
+        
+        self.ButStart=Button(self.Rframe,text="Запуск web сервера")
+        self.ButStart.config(command=lambda:self.RunServer())
         self.ButStart.pack(side=TOP)
         
         self.FormMain.mainloop()
@@ -133,13 +137,14 @@ class scene_main:
     def StartWork(self,id_device):
         self.Device=Device(id_device)
         self.Device.Start()
-        self.th2=Thread(target=runserver)
-        self.th2.daemon=True
-        self.th2.start()
-        
     
     def StopWork(self):
         self.Device.Stop()
+        
+    def RunServer(self):
+        self.th2=Thread(target=runserver)
+        self.th2.daemon=True
+        self.th2.start()
         
         
     

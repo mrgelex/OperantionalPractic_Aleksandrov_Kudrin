@@ -23,8 +23,8 @@ class scene_main:
         with con:
             cursor=con.cursor()
             cursor.execute("""SELECT name FROM DEVICES""")
-            device_list=cursor.fetchall()
-            cursor.execute("""SELECT * FROM DEVICES WHERE name='"""+str(device_list[0][0]+"""'"""))
+            self.device_list=cursor.fetchall()
+            cursor.execute("""SELECT * FROM DEVICES WHERE name='"""+str(self.device_list[0][0]+"""'"""))
             device_data=cursor.fetchall()
         
         self.device_id=device_data[0][0]
@@ -46,11 +46,27 @@ class scene_main:
         self.Bx.pack(side=LEFT)
         self.Scrl=Scrollbar(self.Lframe, command=self.Bx.yview)
         self.Scrl.pack(side=LEFT, fill=Y)
-        self.RefreshBox(device_list)
+        self.RefreshBox()
         
         self.ButSelect=Button(self.LBframe,text="Выбрать")
-        self.ButSelect.config(command=lambda:self.Select(device_list))
+        self.ButSelect.config(command=lambda:self.Select(self.device_list))
         self.ButSelect.pack(side=LEFT)
+        
+        self.ButSave=Button(self.LBframe,text="Добавить")
+        self.ButSave.config(command=lambda:self.AddDevice())
+        self.ButSave.pack(side=LEFT)
+        
+        self.ButSave=Button(self.LBframe,text="Сохранить")
+        self.ButSave.config(command=lambda:self.SaveDevice())
+        self.ButSave.pack(side=LEFT)
+        
+        self.ButSave=Button(self.LBframe,text="Удалить")
+        self.ButSave.config(command=lambda:self.SaveDevice())
+        self.ButSave.pack(side=LEFT)
+        
+        self.ButStart=Button(self.Rframe,text="Запуск сервера")
+        self.ButStart.config(command=lambda:self.Select(self.device_list))
+        self.ButStart.pack(side=BOTTOM)
         
         self.LabEntID=LabEnt(self.Rframe,"ID",self.device_id,TOP)
         self.LabEntImei=LabEnt(self.Rframe,"IMEI",self.device_imei,TOP)
@@ -59,10 +75,15 @@ class scene_main:
         
         self.FormMain.mainloop()
         
-    def RefreshBox(self, data):
+    def RefreshBox(self):
+        con = sl.connect('Logs.db')
+        with con:
+            cursor=con.cursor()
+            cursor.execute("""SELECT name FROM DEVICES""")
+            self.device_list=cursor.fetchall()
         self.Bx.delete(0,END)
         i=0 
-        for str in data:
+        for str in self.device_list:
             self.Bx.insert(i,str)
             i+=1 
         
@@ -78,7 +99,29 @@ class scene_main:
         self.LabEntName.set(answear[0][2])
         self.LabEntType.set(answear[0][3])
         
+    def SaveDevice(self):
+        con = sl.connect('Logs.db')
+        with con:
+            cursor=con.cursor()
+            cursor.execute("""UPDATE DEVICES SET IMEI='"""+self.LabEntImei.get()+"""',name='"""+self.LabEntName.get()+"""',type='"""+self.LabEntType.get()+"""' WHERE id_device="""+self.LabEntID.get())
+            con.commit()
+        self.RefreshBox()
+            
     def AddDevice(self):
-        pass
+        con = sl.connect('Logs.db')
+        with con:
+            cursor=con.cursor()
+            cursor.execute("""INSERT INTO DEVICES (IMEI,name,type) VALUES ('"""+self.LabEntImei.get()+"""','"""+self.LabEntName.get()+"""','"""+self.LabEntType.get()+"""')""")
+            con.commit()
+        self.RefreshBox()
+        
+    def DeleteDevice(self):
+        con = sl.connect('Logs.db')
+        with con:
+            cursor=con.cursor()
+            cursor.execute("""DELETE FROM CLIENTS WHERE id_client="""+self.LabEntID.get())
+            con.commit()
+        self.RefreshBox()
+        
     
 m=scene_main()

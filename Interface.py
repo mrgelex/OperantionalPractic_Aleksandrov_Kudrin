@@ -5,6 +5,8 @@ from Device import Device
 from inter.comand import runserver
 from threading import Thread
 
+pathDB='Logs.db'
+
 class LabEnt:
     def __init__(self, form, label, data, packside):
         self.Lab1=Label(form, text=label)
@@ -22,7 +24,7 @@ class LabEnt:
 class scene_main:
     def __init__(self):
         
-        con = sl.connect('Logs.db')
+        con = sl.connect(pathDB)
         with con:
             cursor=con.cursor()
             cursor.execute("""SELECT name FROM DEVICES""")
@@ -87,7 +89,7 @@ class scene_main:
         self.FormMain.mainloop()
         
     def RefreshBox(self):
-        con = sl.connect('Logs.db')
+        con = sl.connect(pathDB)
         with con:
             cursor=con.cursor()
             cursor.execute("""SELECT name FROM DEVICES""")
@@ -100,7 +102,7 @@ class scene_main:
         
     def Select(self,device_list):
         index=device_list[self.Bx.curselection()[0]][0]
-        con = sl.connect('Logs.db')
+        con = sl.connect(pathDB)
         with con:
             cursor=con.cursor()
             cursor.execute("""SELECT * FROM DEVICES WHERE name='"""+str(index)+"""'""")
@@ -111,7 +113,7 @@ class scene_main:
         self.LabEntType.set(answear[0][3])
         
     def SaveDevice(self):
-        con = sl.connect('Logs.db')
+        con = sl.connect(pathDB)
         with con:
             cursor=con.cursor()
             cursor.execute("""UPDATE DEVICES SET IMEI='"""+self.LabEntImei.get()+"""',name='"""+self.LabEntName.get()+"""',type='"""+self.LabEntType.get()+"""' WHERE id_device="""+self.LabEntID.get())
@@ -119,7 +121,7 @@ class scene_main:
         self.RefreshBox()
             
     def AddDevice(self):
-        con = sl.connect('Logs.db')
+        con = sl.connect(pathDB)
         with con:
             cursor=con.cursor()
             cursor.execute("""INSERT INTO DEVICES (IMEI,name,type) VALUES ('"""+self.LabEntImei.get()+"""','"""+self.LabEntName.get()+"""','"""+self.LabEntType.get()+"""')""")
@@ -127,7 +129,7 @@ class scene_main:
         self.RefreshBox()
         
     def DeleteDevice(self):
-        con = sl.connect('Logs.db')
+        con = sl.connect(pathDB)
         with con:
             cursor=con.cursor()
             cursor.execute("""DELETE FROM CLIENTS WHERE id_client="""+self.LabEntID.get())

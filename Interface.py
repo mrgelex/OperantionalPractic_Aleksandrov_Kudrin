@@ -133,12 +133,14 @@ class scene_main:
     def StartWork(self,id_device):
         self.Device=Device(id_device)
         self.Device.Start()
-        th2=Thread(target=runserver)
-        th2.start()
+        self.th2=Thread(target=runserver)
+        self.th2.daemon=True
+        self.th2.start()
         
     
     def StopWork(self):
         self.Device.Stop()
+        
         
     
 m=scene_main()

@@ -64,7 +64,7 @@ class scene_main:
         self.ButSave.config(command=lambda:self.SaveDevice())
         self.ButSave.pack(side=LEFT)
         
-        self.ButStart=Button(self.Rframe,text="Запуск web")
+        self.ButStart=Button(self.Rframe,text="Запуск web сервера")
         self.ButStart.config(command=lambda:self.Select(self.device_list))
         self.ButStart.pack(side=BOTTOM)
         

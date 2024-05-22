@@ -5,7 +5,7 @@ from Device import Device
 from inter.comand import runserver
 from threading import Thread
 
-pathDB='Logs.db'
+pathDB='inter/Logs.db'
 
 class LabEnt:
     def __init__(self, form, label, data, packside):

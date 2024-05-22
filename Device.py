@@ -6,7 +6,7 @@ from datetime import datetime
 from threading import Thread
 import time
 
-pathDB='Logs.db'
+pathDB='inter/Logs.db'
 
 class Device:
     def __init__(self,id_device):

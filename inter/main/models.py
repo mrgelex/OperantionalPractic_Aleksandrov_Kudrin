@@ -16,7 +16,7 @@ class Devices(models.Model):
 
 class Evet(models.Model):
     id_log=models.IntegerField(primary_key=True)
-    id_device=models.ForeignKey(Devices, on_delete=models.CASCADE)
+    id_device=models.IntegerField()
     date_local=models.DateField()
     time_local=models.TimeField()
     status=models.IntegerField(max_length=5)
@@ -29,7 +29,7 @@ class Evet(models.Model):
 
 class Time(models.Model):
     id_log=models.IntegerField(primary_key=True)
-    id_device=models.ForeignKey(Devices, on_delete=models.CASCADE)
+    id_device=models.IntegerField()
     date_local=models.DateField()
     time_local=models.TimeField()
     status=models.IntegerField(max_length=5)

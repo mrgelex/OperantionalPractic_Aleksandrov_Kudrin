@@ -19,5 +19,5 @@ from. import views
 urlpatterns = [
     path('', views.home),
     path('chart', views.ch, name='chart'),
-    path('adjust', views.adjust, name='adjust')
+    # path('adjust', views.adjust, name='adjust')
 ]

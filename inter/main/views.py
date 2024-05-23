@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Devices, Time
+from .models import Devices, Time, Evet
 import plotly.express as px
 # from plotly.offline import plot
 import plotly.graph_objs as go
@@ -11,36 +11,8 @@ from .forms import Adjastbasic, Dateperiod
 
 def home(request):
    all=Devices.objects.all()
-   global dict_data
-   try:
-      data={
-         'depth' : dict_data["Status_v9"],
-         'power' : 28,
-         'speed' : 4.0,
-         'start_before' : 0,
-         'clean_all' : 165,
-         'clean_yester' : 2,
-         'clean_to' : 1,
-         'id_mod_tel' : 5643564623255646,
-         'last' : '2024-04-18 18:24:47',
-         'virsion' : 2504,
-         'sig_lev' : 87.3
-      }
-   except:
-      data={
-         'depth' : 0,
-         'power' : 28,
-         'speed' : 4.0,
-         'start_before' : 0,
-         'clean_all' : 165,
-         'clean_yester' : 2,
-         'clean_to' : 1,
-         'id_mod_tel' : 5643564623255646,
-         'last' : '2024-04-18 18:24:47',
-         'virsion' : 2504,
-         'sig_lev' : 87.3
-      }
-   return render(request, 'main/home.html', {'all':all, 'get':data}) 
+   get=Time.objects.all().filter(pk=int(Time.objects.all().count()))
+   return render(request, 'main/home.html', {'all':all, 'get':get}) 
 
 def ch(request):
    # if request.method == 'GET':
@@ -63,28 +35,28 @@ def ch(request):
    gr=data.to_html(full_html=False)   
    return render(request, 'main/chart.html', {'gr':gr, 'periodform':periodform}) 
 
-def adjust(request):
-   all=Devices.objects.all()
+# def adjust(request):
+#    all=Devices.objects.all()
 
-   if request.method == 'POST':
-      formbas=Adjastbasic(request.POST)
-      if formbas.is_valid():
-         bas = formbas.cleaned_data
-         # словарь с данными уставок
-         print(bas)
-   data={
-      'depth' : 45,
-      'power' : 28,
-      'speed' : 4.0,
-      'start_before' : 0,
-      'clean_all' : 165,
-      'clean_yester' : 2,
-      'clean_to' : 1,
-      'id_mod_tel' : 5643564623255646,
-      'last' : '2024-04-18 18:24:47',
-      'virsion' : 2504,
-      'sig_lev' : 87.3
-   }
-   formbas=Adjastbasic()
-   return render(request, 'main/adjust.html', {'all':all, 'get':data, 'formbas':formbas}) 
+#    if request.method == 'POST':
+#       formbas=Adjastbasic(request.POST)
+#       if formbas.is_valid():
+#          bas = formbas.cleaned_data
+#          # словарь с данными уставок
+#          print(bas)
+#    data={
+#       'depth' : 45,
+#       'power' : 28,
+#       'speed' : 4.0,
+#       'start_before' : 0,
+#       'clean_all' : 165,
+#       'clean_yester' : 2,
+#       'clean_to' : 1,
+#       'id_mod_tel' : 5643564623255646,
+#       'last' : '2024-04-18 18:24:47',
+#       'virsion' : 2504,
+#       'sig_lev' : 87.3
+#    }
+#    formbas=Adjastbasic()
+#    return render(request, 'main/adjust.html', {'all':all, 'get':data, 'formbas':formbas}) 
 

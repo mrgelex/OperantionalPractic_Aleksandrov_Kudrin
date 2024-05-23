@@ -22,17 +22,21 @@
                 </div>
                 <div class="inf-gdir-child">
                     <h4>Глубина:</h4>
-                    <p>{{get.depth}} м</p>
-                </div>
+                    {% for i in get %}
+                        <p>{{i.depth}} м</p>
+                        {% endfor %}
+                    </div> 
                 <div class="inf-gdir-child">
-                    <h4>Номер IMEL:</h4>
+                    <h4>Номер IMEI:</h4>
                     {% for i in all %}
                         <p>{{i.imel}}</p>
                     {% endfor %}
                 </div>
                 <div class="inf-gdir-child">
                     <h4>Мощность:</h4>
-                    <p>{{get.power}} %</p>
+                    {% for i in get %}
+                        <p>{{i.power}} %</p>
+                    {% endfor %}
                 </div>
                 <div class="inf-gdir-child">
                     <h4>Имя устройства:</h4>
@@ -41,62 +45,31 @@
                     {% endfor %}
                 </div>
                 <div class="inf-gdir-child">
-                    <h4>Скорость:</h4>
-                    <p>{{get.speed}} м/мин</p>
-                </div>
+                    <h4>Статус:</h4>
+                    {% for i in get %}
+                        <p>{{i.status}}</p>
+                    {% endfor %}
+                    </div>
                 <div class="inf-gdir-child">
                     <h4>Тип устройства:</h4>
                     {% for i in all %}
                         <p>{{i.type}}</p>
                     {% endfor %}
                 </div>
-                <div class="inf-gdir-child">
-                    <h4>До старта:</h4>
-                    <p>{{get.start_before}} мин</p>
-                </div>
-            </div>
-            <div class="inf-gdir-item">
-                <h2>Модуль связи</h2>
-                <div class="inf-gdir-child">
-                    <h4>ID:</h4>
-                    <p>{{get.id_mod_tel}}</p>
-                </div>
-                <div class="inf-gdir-child">
-                    <h4>Последний ответ:</h4>
-                    <p>{{get.last}}</p>
-                </div>
-                <div class="inf-gdir-child">
-                    <h4>Версия:</h4>
-                    <p>{{get.virsion}}</p>
-                </div>
-                <div class="inf-gdir-child">
-                    <h4>Качество связи:</h4>
-                    <p>{{get.sig_lev}} %</p>
-                </div>
-                <h2>Количество чисток</h2>
-                <div class="inf-gdir-child">
-                    <h4>Всего:</h4>
-                    <p>{{get.clean_all}}</p>
-                </div>
-                <div class="inf-gdir-child">
-                    <h4>Вчера:</h4>
-                    <p>{{get.clean_yester}}</p>
-                </div>
-                <div class="inf-gdir-child">
-                    <h4>Сегодня:</h4>
-                    <p>{{get.clean_to}}</p>
-                </div>
+           
+                
         </div>
         <div class="but">
             <form action="chart" target="_blank">
                 <button>график</button>
             </form>
         </div>
-        <div class="but">
+        </div>
+        <!-- <div class="but">
             <form action="adjust" target="_blank">
                 <button>уставки</button>
             </form>
-        </div>
+        </div> -->
     </body>
 </html>
 

@@ -21,14 +21,9 @@ h2, h4{
     margin-left: 10px;
 }
 
-/* h4{
-    position: normal;
-    margin-left: 10px;
-} */
-
 .inf-grid{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     margin-left: 10%;
     margin-right: 10%;
@@ -40,16 +35,18 @@ h2, h4{
 }
 
 .inf-gdir-child{
+    margin-left: 5%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: repeat(2, 160px);
+    grid-template-rows: repeat(1, 40px);
     align-items:center
+    
 }
 
 .but{
     height: 30px;
     align-items:center;
-    margin-left: 25%;
+    margin-left: 5%;
 }
 
 .gr{

@@ -33,9 +33,10 @@ class scene_main:
             device_data=cursor.fetchall()
         
         self.device_id=device_data[0][0]
-        self.device_imei=device_data[0][1]
-        self.device_name=device_data[0][2]
-        self.device_type=device_data[0][3]
+        self.device_serial=device_data[0][1]
+        self.device_imei=device_data[0][2]
+        self.device_name=device_data[0][3]
+        self.device_type=device_data[0][4]
         
         self.FormMain=Tk()
         self.FormMain.geometry("400x360")
@@ -70,6 +71,7 @@ class scene_main:
         self.ButSave.pack(side=LEFT)
         
         self.LabEntID=LabEnt(self.Rframe,"ID",self.device_id,TOP)
+        self.LabEntSerial=LabEnt(self.Rframe,"serial",self.device_serial,TOP)
         self.LabEntImei=LabEnt(self.Rframe,"IMEI",self.device_imei,TOP)
         self.LabEntName=LabEnt(self.Rframe,"Номер",self.device_name,TOP)
         self.LabEntType=LabEnt(self.Rframe,"Тип",self.device_type,TOP)
@@ -108,15 +110,16 @@ class scene_main:
             cursor.execute("""SELECT * FROM DEVICES WHERE name='"""+str(index)+"""'""")
             answear=cursor.fetchall()
         self.LabEntID.set(answear[0][0])
-        self.LabEntImei.set(answear[0][1])
-        self.LabEntName.set(answear[0][2])
-        self.LabEntType.set(answear[0][3])
+        self.LabEntSerial.set(answear[0][1])
+        self.LabEntImei.set(answear[0][2])
+        self.LabEntName.set(answear[0][3])
+        self.LabEntType.set(answear[0][4])
         
     def SaveDevice(self):
         con = sl.connect(pathDB)
         with con:
             cursor=con.cursor()
-            cursor.execute("""UPDATE DEVICES SET IMEI='"""+self.LabEntImei.get()+"""',name='"""+self.LabEntName.get()+"""',type='"""+self.LabEntType.get()+"""' WHERE id_device="""+self.LabEntID.get())
+            cursor.execute("""UPDATE DEVICES SET serial='"""+self.LabEntSerial.get()+"""',IMEI='"""+self.LabEntImei.get()+"""',name='"""+self.LabEntName.get()+"""',type='"""+self.LabEntType.get()+"""' WHERE id_device="""+self.LabEntID.get())
             con.commit()
         self.RefreshBox()
             
@@ -124,7 +127,7 @@ class scene_main:
         con = sl.connect(pathDB)
         with con:
             cursor=con.cursor()
-            cursor.execute("""INSERT INTO DEVICES (IMEI,name,type) VALUES ('"""+self.LabEntImei.get()+"""','"""+self.LabEntName.get()+"""','"""+self.LabEntType.get()+"""')""")
+            cursor.execute("""INSERT INTO DEVICES (serial,IMEI,name,type) VALUES ('"""+self.LabEntSerial.get()+"""','"""+self.LabEntImei.get()+"""','"""+self.LabEntName.get()+"""','"""+self.LabEntType.get()+"""')""")
             con.commit()
         self.RefreshBox()
         

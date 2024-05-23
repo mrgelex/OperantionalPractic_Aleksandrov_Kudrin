@@ -61,8 +61,6 @@ class Device:
             dict_resp["Depth"]=dict_resp["Depth"]-65536
         if dict_resp["ArcDepth"]>32767:
             dict_resp["ArcDepth"]=dict_resp["ArcDepth"]-65536 
-        global dict_data  
-        dict_data=dict_resp
         return dict_resp
         
     def WriteTimeLog(self,dr):

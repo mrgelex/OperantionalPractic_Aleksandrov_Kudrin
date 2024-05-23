@@ -6,7 +6,6 @@ from inter.comand import runserver
 from threading import Thread
 
 pathDB='inter/Logs.db'
-dict_data = ""
 
 class LabEnt:
     def __init__(self, form, label, data, packside):

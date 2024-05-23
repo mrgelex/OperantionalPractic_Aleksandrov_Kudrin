@@ -60,7 +60,7 @@ class Device:
         return dict_resp
         
     def WriteTimeLog(self,dr):
-        date_local=datetime.today().strftime("%Y.%m.%d")
+        date_local=datetime.today().strftime("%Y-%m-%d")
         time_local=datetime.today().strftime("%H:%M:%S")
         con = sl.connect(pathDB)
         with con:

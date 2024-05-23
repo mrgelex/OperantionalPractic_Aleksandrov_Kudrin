@@ -32,6 +32,7 @@ def ch(request):
    data=px.line(labels={'x':'Время', 'y':'М/%'})
    periodform=Dateperiod()
    if s and e:
+      print(s,e)
       xx=[]
       yyd=list(Time.objects.values_list('depth', flat=True).filter(date_local__gte=s, date_local__lte=e))
       yyp=list(Time.objects.values_list('power', flat=True).filter(date_local__gte=s, date_local__lte=e))

@@ -5,24 +5,41 @@ import plotly.express as px
 import plotly.graph_objs as go
 import datetime as dt
 
+
 from .forms import Adjastbasic, Dateperiod
 
 
 def home(request):
    all=Devices.objects.all()
-   data={
-      'depth' : 45,
-      'power' : 28,
-      'speed' : 4.0,
-      'start_before' : 0,
-      'clean_all' : 165,
-      'clean_yester' : 2,
-      'clean_to' : 1,
-      'id_mod_tel' : 5643564623255646,
-      'last' : '2024-04-18 18:24:47',
-      'virsion' : 2504,
-      'sig_lev' : 87.3
-   }
+   global dict_data
+   try:
+      data={
+         'depth' : dict_data["Status_v9"],
+         'power' : 28,
+         'speed' : 4.0,
+         'start_before' : 0,
+         'clean_all' : 165,
+         'clean_yester' : 2,
+         'clean_to' : 1,
+         'id_mod_tel' : 5643564623255646,
+         'last' : '2024-04-18 18:24:47',
+         'virsion' : 2504,
+         'sig_lev' : 87.3
+      }
+   except:
+      data={
+         'depth' : 0,
+         'power' : 28,
+         'speed' : 4.0,
+         'start_before' : 0,
+         'clean_all' : 165,
+         'clean_yester' : 2,
+         'clean_to' : 1,
+         'id_mod_tel' : 5643564623255646,
+         'last' : '2024-04-18 18:24:47',
+         'virsion' : 2504,
+         'sig_lev' : 87.3
+      }
    return render(request, 'main/home.html', {'all':all, 'get':data}) 
 
 def ch(request):

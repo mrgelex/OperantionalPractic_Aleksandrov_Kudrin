@@ -72,7 +72,7 @@ class Device:
         
     def WriteEventLog(self,dr):
         if self.adt1 != dr["AcrDT1"] or self.adt2 != dr["AcrDT2"] or self.adt3 != dr["ArcDT3"]:
-            date_local=datetime.today().strftime("%Y.%m.%d")
+            date_local=datetime.today().strftime("%Y-%m-%d")
             time_local=datetime.today().strftime("%H:%M:%S")
             con = sl.connect(pathDB)
             with con:

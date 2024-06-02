@@ -170,7 +170,7 @@ class scene_main:
         self.LabEntPort=LabEnt(self.FormComSet,"Порт",self.port,TOP)
         self.LabEntBaudrate=LabEnt(self.FormComSet,"Скорость",self.baudrate,TOP)
         self.LabEntTimeout=LabEnt(self.FormComSet,"Таймаут",self.timeout,TOP)
-        self.LabEntBytesize=LabEnt(self.FormComSet,"Размер пакета",self.bytesize,TOP)
+        self.LabEntBytesize=LabEnt(self.FormComSet,"Биты данных",self.bytesize,TOP)
         self.LabEntParity=LabEnt(self.FormComSet,"Четность",self.parity,TOP)
         self.LabEntStopBit=LabEnt(self.FormComSet,"Стоп бит",self.stopbits,TOP)
         self.ButStart=Button(self.FormComSet,text="Ок")

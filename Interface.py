@@ -38,6 +38,13 @@ class scene_main:
         self.device_name=device_data[0][3]
         self.device_type=device_data[0][4]
         
+        self.port="COM3"
+        self.baudrate=9600
+        self.timeout=1
+        self.bytesize=8
+        self.parity="N"
+        self.stopbits=1
+        
         self.FormMain=Tk()
         self.FormMain.geometry("400x360")
         self.FormMain.title("Тестовый сервер")
@@ -87,6 +94,10 @@ class scene_main:
         self.ButStart=Button(self.Rframe,text="Запуск web сервера")
         self.ButStart.config(command=lambda:self.RunServer())
         self.ButStart.pack(side=TOP)
+        
+        self.ButComSet=Button(self.Rframe,text="Настройки COM")
+        self.ButComSet.config(command=lambda:self.ComSetting())
+        self.ButComSet.pack(side=TOP)
         
         self.FormMain.mainloop()
         
@@ -140,7 +151,7 @@ class scene_main:
         self.RefreshBox()
         
     def StartWork(self,id_device):
-        self.Device=Device(id_device)
+        self.Device=Device(id_device,self.port,self.baudrate,self.timeout,self.bytesize,self.parity,self.stopbits)
         self.Device.Start()
     
     def StopWork(self):
@@ -151,6 +162,30 @@ class scene_main:
         self.th2.daemon=True
         self.th2.start()
         
+    def ComSetting(self):
+        self.FormComSet=Tk()
+        self.FormComSet.geometry("150x280")
+        self.FormComSet.title("Тестовый сервер")
         
+        self.LabEntPort=LabEnt(self.FormComSet,"Порт",self.port,TOP)
+        self.LabEntBaudrate=LabEnt(self.FormComSet,"Скорость",self.baudrate,TOP)
+        self.LabEntTimeout=LabEnt(self.FormComSet,"Таймаут",self.timeout,TOP)
+        self.LabEntBytesize=LabEnt(self.FormComSet,"Размер пакета",self.bytesize,TOP)
+        self.LabEntParity=LabEnt(self.FormComSet,"Четность",self.parity,TOP)
+        self.LabEntStopBit=LabEnt(self.FormComSet,"Стоп бит",self.stopbits,TOP)
+        self.ButStart=Button(self.FormComSet,text="Ок")
+        self.ButStart.config(command=lambda:self.SaveCom())
+        self.ButStart.pack(side=TOP)
+        
+        self.FormComSet.mainloop()
+        
+    def SaveCom(self):
+        self.port=self.LabEntPort.get()
+        self.baudrate=self.LabEntBaudrate.get()
+        self.timeout=self.LabEntTimeout.get()
+        self.bytesize=self.LabEntBytesize.get()
+        self.parity=self.LabEntParity.get()
+        self.stopbits=self.LabEntStopBit.get()
+        self.FormComSet.destroy()
     
 m=scene_main()

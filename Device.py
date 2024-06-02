@@ -9,7 +9,7 @@ import time
 pathDB='inter/Logs.db'
 
 class Device:
-    def __init__(self,id_device):
+    def __init__(self,id_device,port,baudrate,timeout,bytesize,parity,stopbits):
         con = sl.connect(pathDB)
         cursor=con.cursor()
         cursor.execute("""SELECT name FROM DEVICES""")
@@ -18,6 +18,12 @@ class Device:
         self.adt1=0
         self.adt2=0
         self.adt3=0
+        self.port=port
+        self.baudrate=baudrate
+        self.timeout=timeout
+        self.bytesize=bytesize
+        self.parity=parity
+        self.stopbits=stopbits
         
         
     def Start(self):
@@ -90,7 +96,7 @@ class Device:
             self.adt3=dr["ArcDT3"]
             
     def Thread(self):
-        self.client = modbusClient.ModbusSerialClient(port="COM3",framer=Framer.RTU,baudrate=9600,timeout=1,bytesize=8,parity="N",stopbits=1,strict=False)
+        self.client = modbusClient.ModbusSerialClient(port=self.port,framer=Framer.RTU,baudrate=self.baudrate,timeout=self.timeout,bytesize=self.bytesize,parity=self.parity,stopbits=self.stopbits,strict=False)
         self.client.connect()
         while self.enable:
             rr=self.Request1()
@@ -101,7 +107,6 @@ class Device:
                 self.WriteEventLog(dr)
             time.sleep(1)
         self.client.close()
-        
         
 #D=Device("123")     
 #D.Start()

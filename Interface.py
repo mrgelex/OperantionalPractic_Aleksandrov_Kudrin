@@ -146,7 +146,7 @@ class scene_main:
         con = sl.connect(pathDB)
         with con:
             cursor=con.cursor()
-            cursor.execute("""DELETE FROM CLIENTS WHERE id_client="""+self.LabEntID.get())
+            cursor.execute("""DELETE FROM DEVICES WHERE id_device="""+self.LabEntID.get())
             con.commit()
         self.RefreshBox()
         
